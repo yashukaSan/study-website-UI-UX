@@ -6,19 +6,18 @@ import { motion, AnimatePresence } from 'motion/react';
 
 export default function Header({ classN }) {
 
-    const [isOpen, setIsOpen] = useState(true);
     const { theme, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuContent = ['Menu', 'Home', 'Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
-    const classes = ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'];
-    const boards = ['CBSE', 'ICSE',];
-    const exams = ['CUET', 'NEET', 'JEE', 'Class 6-8', 'Class 9-10', 'Class 12', 'All'];
-    const studyMaterials = ['Notes', 'Practice Papers', 'Reference Books'];
-    const examUpdates = [
-        'All Updates', 'CUET Updates', 'NEET Updates', 'JEE Updates',
-        'Board Exam Updates', 'Admit Cards', 'Results', 'Syllabus Updates'
-    ];
-    const stateBoard = ['UP Board', 'Bihar Board', 'Rajathan Board', 'MP Board'];
+    // const classes = ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'];
+    // const boards = ['CBSE', 'ICSE',];
+    // const exams = ['CUET', 'NEET', 'JEE', 'Class 6-8', 'Class 9-10', 'Class 12', 'All'];
+    // const studyMaterials = ['Notes', 'Practice Papers', 'Reference Books'];
+    // const examUpdates = [
+    //     'All Updates', 'CUET Updates', 'NEET Updates', 'JEE Updates',
+    //     'Board Exam Updates', 'Admit Cards', 'Results', 'Syllabus Updates'
+    // ];
+    // const stateBoard = ['UP Board', 'Bihar Board', 'Rajathan Board', 'MP Board'];
 
     return (
         <>
@@ -40,54 +39,52 @@ export default function Header({ classN }) {
                 </div>
 
             </section>
-            <button onClick={()=>setIsOpen(prev => !prev)}>Invert</button>
-            
-                    <AnimatePresence>
-                        {isMenuOpen && (
-                            <motion.div
-                                // 1. Where it starts (off-screen to the right)
-                                initial={{ x: '100%' }}
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <motion.div
+                        // 1. Where it starts (off-screen to the right)
+                        initial={{ x: '100%' }}
 
-                                // 2. Where it animates to (slides into view)
-                                animate={{ x: 0 }}
+                        // 2. Where it animates to (slides into view)
+                        animate={{ x: 0 }}
 
-                                // 3. Where it goes when 'isOpen' becomes false (slides back right)
-                                exit={{ x: '100%' }}
+                        // 3. Where it goes when 'isOpen' becomes false (slides back right)
+                        exit={{ x: '100%' }}
 
-                                // 4. Control the speed and feel
-                                transition={{ type: 'tween', duration: 0.4, ease: 'easeInOut' }}
-                                className="z-100 absolute w-full backdrop-blur top-0 bg-[#010101]/70 h-full"
-                                // style={{
-                                //     position: 'fixed',
-                                //     top: 0,
-                                //     right: 0,
-                                //     width: '300px',
-                                //     height: '100vh',
-                                //     background: '#fff',
-                                //     zIndex: 100
-                                // }}
-                            >
-                                {/* Close Icon */}
-                                <X onClick={() => setIsMenuOpen(false)} className="hover:cursor-pointer m-2 bg-black ml-[90%]" size={50} />
+                        // 4. Control the speed and feel
+                        transition={{ type: 'tween', duration: 0.4, ease: 'easeInOut' }}
+                        className="z-100 absolute w-full backdrop-blur top-0 bg-[#010101]/70 h-full"
+                    // style={{
+                    //     position: 'fixed',
+                    //     top: 0,
+                    //     right: 0,
+                    //     width: '300px',
+                    //     height: '100vh',
+                    //     background: '#fff',
+                    //     zIndex: 100
+                    // }}
+                    >
+                        {/* Close Icon */}
+                        <X onClick={() => setIsMenuOpen(false)} className="hover:cursor-pointer m-2 bg-black ml-[90%]" size={50} />
 
-                                <ul className="border pl-3" >
-                                    {menuContent.map((ele, ind) => (
-                                        <li className="border p-3 text-xl flex justify-between text-white" key={ind}>
-                                            {ele} <ChevronDown /></li>
-                                    ))}
+                        <ul className="border pl-3" >
+                            {menuContent.map((ele, ind) => (
+                                <li className="border p-3 text-xl flex justify-between text-white" key={ind}>
+                                    {ele} <ChevronDown /></li>
+                            ))}
 
-                                </ul>
-                                <div className="border grid gap-3">
-                                    <label className="flex border mx-3 p-2" >
-                                        <Search /><input placeholder='Search' className="border w-full p-1" />
-                                    </label>
-                                    <button>
-                                        Sign In
-                                    </button>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                        </ul>
+                        <div className="border grid gap-3">
+                            <label className="flex border mx-3 p-2" >
+                                <Search /><input placeholder='Search' className="border w-full p-1" />
+                            </label>
+                            <button>
+                                Sign In
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }
