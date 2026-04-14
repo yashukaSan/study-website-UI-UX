@@ -1,5 +1,5 @@
 import logo from "../assets/Group.png"
-import { Sun, Menu, Moon, X } from 'lucide-react'
+import { Sun, Menu, Moon, X, Search } from 'lucide-react'
 import { useTheme } from '../ThemeContext'
 import { useState } from 'react';
 
@@ -17,7 +17,18 @@ function MenuDisplay(){
 export default function Header({ classN }) {
     const { theme, toggleTheme } = useTheme();
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
+    const menuContent = ['Menu', 'Home', 'Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
+    const classes =[];
+    const boards = [];
+    const exams = [ '' ];
+    const studyMaterials = [ 'Notes', 'Practice Papers', 'Reference Books' ];
+    const examUpdates = [
+        'All Updates', 'CUET Updates', 'NEET Updates', 'JEE Updates',
+        'Board Exam Updates', 'Admit Cards', 'Results', 'Syllabus Updates'
+    ];
+
     return (
+        <>
         <section className={classN}>
             <div className="flex">
                 <img src={logo} alt="site logo" placeholder="blur" className="h-15 m-3" />
@@ -34,6 +45,24 @@ export default function Header({ classN }) {
                     
                 </button>
             </div>
+            
         </section>
+        <section>
+        <ul className="border pl-3" >
+            {menuContent.map((ele, ind)=> (
+                <li className="border p-3 text-xl" key={ind}>{ele}</li>
+            ))}
+            
+        </ul>
+        <div className="border grid gap-3">
+            <label className="flex border mx-3 p-2" >
+                   <Search /><input placeholder='Search' className="border w-full p-1" />
+            </label>
+            <button>
+                Sign In
+            </button>
+        </div>
+        </section>
+        </>
     );
 }
