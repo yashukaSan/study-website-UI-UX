@@ -9,6 +9,7 @@ export default function Header({ classN }) {
     const { theme, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuContent = ['Menu', 'Home', 'Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
+    const largeMenu = ['Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
     // const classes = ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'];
     // const boards = ['CBSE', 'ICSE',];
     // const exams = ['CUET', 'NEET', 'JEE', 'Class 6-8', 'Class 9-10', 'Class 12', 'All'];
@@ -22,24 +23,47 @@ export default function Header({ classN }) {
     return (
         <>
             <section className={classN}>
-                <div className="flex">
-                    <img src={logo} alt="site logo" placeholder="blur" className="h-15 m-3" />
-                    <h1 className="text-2xl text-center mt-4 text-black dark:text-white">EXAMWALISITE</h1>
+                {/*LOGO AND SITE NAME*/}
+                <div className="flex ">
+                    <img src={logo} alt="site logo" placeholder="blur" className="h-12 m-3" />
+                    <h1 className="text-2xl text-center mt-4 text-black">EXAMWALISITE</h1>
                 </div>
 
-                <div className="flex border w-[25%]">
-                    <button className="border flex w-[50%] justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                {/*menu tabs when creen larger than 768px*/}
+                <div className="lg:flex  hidden ">
+                    <button>Home</button>
+                    <ul className="border flex justify-center" >
+                        {largeMenu.map((ele, ind) => (
+                            <li className="border pr-1 m-auto text-xs flex justify-between text-black" key={ind}>
+                                {ele} <ChevronDown /></li>
+                        ))}
+
+                    </ul>
+                    <button className="border rounded-full h-12 w-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
                         {theme === 'light' ? (<Moon className="w-9 h-9 text-grey-800" />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
                         {/* <Sun className="text-yellow-300 bg-yellow-800 rounded-full" size={40} />*/}
                     </button>
-                    <button onClick={() => setIsMenuOpen((prev) => !prev)}>
-                        {!isMenuOpen ? <Menu size={30} /> : <X size={30} />}
 
+                    <button className="border rounded-full h-12 w-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                        {<Search />}
+                        {/* <Sun className="text-yellow-300 bg-yellow-800 rounded-full" size={40} />*/}
+                    </button>
+                    <button className="m-1 p-1 border rounded-xl bg-[#0076ff] text-black font-bold">
+                        Sign In
+                    </button>
+                </div>
+                        {/* Menu bar when screen size is lower than 768px */}
+                <div className="flex w-[25%] lg:hidden">
+                    <button className="border flex w-[50%] justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                        {theme === 'light' ? (<Moon className="w-9 h-9 text-grey-800" />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
+                    </button>
+                    <button onClick={() => setIsMenuOpen((prev) => !prev)} className="lg:hidden" >
+                        {!isMenuOpen ? <Menu size={30} /> : <X size={30} />}
                     </button>
                 </div>
 
             </section>
-            <AnimatePresence>
+            <AnimatePresence className="lg:hidden">
                 {isMenuOpen && (
                     <motion.div
                         // 1. Where it starts (off-screen to the right)

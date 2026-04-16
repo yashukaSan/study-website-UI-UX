@@ -20,19 +20,18 @@ function PopUpScreen({isClose, clasN, setClose}) {
 
   return (
       <section className={isClose? "hidden" : clasN}>
-        <div className="flex justify-around text-2xl text-white ">
-          <div className="flex gap-4"><Mail className="text-blue-500 mt-2" /> Stay Updated</div> <X className="" onClick={()=>setClose(prev => !prev)} />
+        <div className="flex justify-around text-2xl text-black ">
+          <div className="flex gap-6 lg:text-3xl"><Mail className="text-blue-500 mt-2 lg:h-10 lg:w-10 lg:m-0" /> Stay Updated</div> <X className="lg:mt-1 lg:h-8 lg:w-10" onClick={()=>setClose(prev => !prev)} />
         </div>
         <hr className="w-[95%] mt-2 m-auto" />
-        <div className="mx-10 my-3">
-          Get the latest updates, exclusive offers, and study resources delivred to your inbox.
+        <div className="mx-10 lg:text-xl my-3">
+          Get the latest updates, exclusive offers, and study resources deliverd to your inbox.
         </div>
         <label className="mx-10 rounded-lg" >
-          <input type="text" placeholder="Enter your email" className="p-2 w-[100%] border border-blue-500" />
-          <button className="p-1 flex my-2 w-[100%] text-white font-bold p-2 justify-center bg-blue-500 m-auto" >Subscribe Now&nbsp; <ArrowRight className="w-5" /></button>
+          <input type="text" placeholder="Enter Your Email" className="p-2 rounded-lg text-center w-full border border-blue-500" />
+        <button className="p-1 rounded-lg flex my-2 w-full text-black font-bold justify-center bg-blue-500 m-auto" onClick={() => setClose(prev => !prev)} >Subscribe Now&nbsp; <ArrowRight className="w-5" /></button>
         </label>
-
-        <ul className="flex justify-center list-disc list-inside gap-3 text-xs">
+        <ul className="flex justify-center lg:text-sm list-disc list-inside gap-3 text-xs">
           <li>NO SPAM</li>
           <li>UNSUBSCRIBE ANYTIME</li>
         </ul>
@@ -44,13 +43,13 @@ function PopUpScreen({isClose, clasN, setClose}) {
 //MAIN FUNCTION
 function App() {
   const [isClose, setIsClose] = useState(false);
-  const popUpClass = "animate duration-500 ease-in-out delay-500 backdrop-blur-lg grid border-t-blue-500 border-t-6 shadow-2xl shadow-white/40 absolute justify-center p-3 rounded-xl w-100 bg-black z-200 mt-30 sm:ml-10 mx-5";
+  const popUpClass = "animation duration-500 ease-in-out lg:w-[25vw] lg:h-[40vh] lg:text-lg delay-500 backdrop-blur-lg grid border-t-blue-500 border-t-6 shadow-2xl shadow-white/40 absolute justify-center p-3 rounded-xl w-100 bg-black z-200 mt-30 lg:mt-50 sm:ml-10 lg:ml-50 mx-5";
 
   return (
-    <main>
+    <main className="text-black">
       <PopUpScreen isClose={isClose} clasN={popUpClass} setClose={setIsClose} />
       <section className={isClose? "" : "blur"}>
-      <Header classN="border h-[10vh] flex justify-between" />
+      <Header classN="border h-[10vh] flex justify-between w-full lg:w-[60vw] lg:m-auto lg:h-[7vh] " />
       <Hero />
       <Overview />
       <Courses />
