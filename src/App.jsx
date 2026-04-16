@@ -49,7 +49,7 @@ function App() {
     <main className="text-black">
       <PopUpScreen isClose={isClose} clasN={popUpClass} setClose={setIsClose} />
       <section className={isClose? "" : "blur"}>
-      <Header classN="border h-[10vh] flex justify-between w-full lg:w-[60vw] lg:m-auto lg:h-[7vh] " />
+      <Header classN="border border-[#aaaaaa] h-[7vh] flex lg:w-full justify-between w-full lg:w-[60vw] lg:h-[7vh] " />
       <Hero />
       <Overview />
       <Courses />

@@ -24,20 +24,31 @@ export default function Header({ classN }) {
         <>
             <section className={classN}>
                 {/*LOGO AND SITE NAME*/}
-                <div className="flex ">
-                    <img src={logo} alt="site logo" placeholder="blur" className="h-12 m-3" />
-                    <h1 className="text-2xl text-center mt-4 text-black">EXAMWALISITE</h1>
+                <div className="flex justify-center items-center gap-3 sm:gap-10 lg:gap-1 xl:gap-12 align-center p-2">
+                    <img src={logo} alt="site logo" placeholder="blur" className="h-15 items-center m-auto border rounded-full " />
+                    <h1 className="text-2xl text-center mt-4 text-black font-bold font-serif m-auto">ExamWaliSite</h1>
                 </div>
 
-                {/*menu tabs when creen larger than 768px*/}
-                <div className="lg:flex  hidden ">
-                    <button>Home</button>
+                {/* Menu bar when screen size is lower than 768px */}
+
+                <div className="flex w-[25%] lg:hidden justify-around items-center">
+                    <button className="border border-[#a0a0a0] text-semibold rounded-full flex w-12 h-12 justify-center items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                        {theme === 'light' ? (<Moon className="w-9 h-9 " />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
+                    </button>
+                    <button onClick={() => setIsMenuOpen((prev) => !prev)} className="lg:hidden" >
+                        {!isMenuOpen ? <Menu size={30} /> : <X size={30} />}
+                    </button>
+                </div>
+
+                {/*menu tabs when screen larger than 768px*/}
+
+                <div className="lg:flex text-sm border hidden gap-2 ">
+                    <button >Home</button>
                     <ul className="border flex justify-center" >
                         {largeMenu.map((ele, ind) => (
-                            <li className="border pr-1 m-auto text-xs flex justify-between text-black" key={ind}>
+                            <li className="border pr-1 m-auto text-sm flex justify-between text-black" key={ind}>
                                 {ele} <ChevronDown /></li>
                         ))}
-
                     </ul>
                     <button className="border rounded-full h-12 w-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
                         {theme === 'light' ? (<Moon className="w-9 h-9 text-grey-800" />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
@@ -50,15 +61,6 @@ export default function Header({ classN }) {
                     </button>
                     <button className="m-1 p-1 border rounded-xl bg-[#0076ff] text-black font-bold">
                         Sign In
-                    </button>
-                </div>
-                        {/* Menu bar when screen size is lower than 768px */}
-                <div className="flex w-[25%] lg:hidden">
-                    <button className="border flex w-[50%] justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
-                        {theme === 'light' ? (<Moon className="w-9 h-9 text-grey-800" />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
-                    </button>
-                    <button onClick={() => setIsMenuOpen((prev) => !prev)} className="lg:hidden" >
-                        {!isMenuOpen ? <Menu size={30} /> : <X size={30} />}
                     </button>
                 </div>
 
