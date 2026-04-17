@@ -6,11 +6,12 @@ import { motion, AnimatePresence } from 'motion/react';
 
 export default function Header({ classN }) {
 
-    const [hoveredIndex, setHoveredIndex] = useState(false);
+    const [hoveredIndex, setHoveredIndex] = useState(2);
     const { theme, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const menuContent = ['Menu', 'Home', 'Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
+    const menuContent = ['Home', 'Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
     const largeMenu = ['Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
+    const menuOptions = [ 'classes','boards', 'exams', 'studyMaterials', 'examUpdates' ];
     const classes = ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'];
     const boards = ['CBSE', 'ICSE',];
     const exams = ['CUET', 'NEET', 'JEE', 'Class 6-8', 'Class 9-10', 'Class 12', 'All'];
@@ -21,6 +22,9 @@ export default function Header({ classN }) {
     ];
     const stateBoard = ['UP Board', 'Bihar Board', 'Rajathan Board', 'MP Board'];
 
+    console.log(menuOptions[hoveredIndex]);
+    console.log(menuOptions.indexOf(menuOptions[hoveredIndex]))
+    classes.forEach(ele => console.log(ele));
     return (
         <>
             <section className={classN}>
@@ -99,15 +103,15 @@ export default function Header({ classN }) {
                                         className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
                                     />
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         {(hoveredIndex === ind) && 
                                             <ul>
-                                                {ele.toLowercase.map((el, ind2)=> (
+                                                {menuOptions[ind].map((el, ind2)=> (
                                                     <li key={ind2}>{el}</li>
                                                 ))}
                                             </ul>
                                         }
-                                    </div>
+                                    </div> */}
                                 </li>
                             ))}
                         </ul>
