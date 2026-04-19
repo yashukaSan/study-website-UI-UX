@@ -6,25 +6,35 @@ import { motion, AnimatePresence } from 'motion/react';
 
 export default function Header({ classN }) {
 
-    const [hoveredIndex, setHoveredIndex] = useState(2);
+    const [hoveredIndex, setHoveredIndex] = useState(false);
+    const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuContent = ['Home', 'Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
     const largeMenu = ['Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
     const menuOptions = [ 'classes','boards', 'exams', 'studyMaterials', 'examUpdates' ];
-    const classes = ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'];
-    const boards = ['CBSE', 'ICSE',];
-    const exams = ['CUET', 'NEET', 'JEE', 'Class 6-8', 'Class 9-10', 'Class 12', 'All'];
-    const studyMaterials = ['Notes', 'Practice Papers', 'Reference Books'];
-    const examUpdates = [
-        'All Updates', 'CUET Updates', 'NEET Updates', 'JEE Updates',
-        'Board Exam Updates', 'Admit Cards', 'Results', 'Syllabus Updates'
-    ];
-    const stateBoard = ['UP Board', 'Bihar Board', 'Rajathan Board', 'MP Board'];
+    // const classes = ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'];
+    // const boards = ['CBSE', 'ICSE',];
+    // const exams = ['CUET', 'NEET', 'JEE', 'Class 6-8', 'Class 9-10', 'Class 12', 'All'];
+    // const studyMaterials = ['Notes', 'Practice Papers', 'Reference Books'];
+    // const examUpdates = [
+    //     'All Updates', 'CUET Updates', 'NEET Updates', 'JEE Updates',
+    //     'Board Exam Updates', 'Admit Cards', 'Results', 'Syllabus Updates'
+    // ];
+    // const stateBoard = ['UP Board', 'Bihar Board', 'Rajathan Board', 'MP Board'];
 
-    console.log(menuOptions[hoveredIndex]);
-    console.log(menuOptions.indexOf(menuOptions[hoveredIndex]))
-    classes.forEach(ele => console.log(ele));
+    const menuData = {
+        classes: ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'],
+        boards: ['CBSE', 'ICSE'],
+        exams: ['CUET', 'NEET', 'JEE', 'Class 6-8', 'Class 9-10', 'Class 12', 'All'],
+        studyMaterials: ['Notes', 'Practice Papers', 'Reference Books'],
+        examUpdates: ['All Updates', 'CUET Updates', 'NEET Updates', 'JEE Updates']
+    };
+    const [activeMenu, setActiveMenu] = useState('classes');
+
+    console.log(hoveredIndex>0);
+    console.log(hoveredIndex<5);
+
     return (
         <>
             <section className={classN}>
@@ -89,40 +99,86 @@ export default function Header({ classN }) {
                         {/* Close Icon */}
                         <X onClick={() => setIsMenuOpen(false)} className="hover:cursor-pointer m-2 text-white ml-[90%]" size={50} />
 
+                        {/* <ul className="border pl-3"> 
+                        //     {menuContent.map((ele, ind) => (
+                        //         <li
+                        //             key={ind}
+                        //             className="border animate duration-300 p-3 text-xl text-white"
+                        //             onMouseEnter={() => {
+                        //                 setHoveredIndex(ind);
+                        //                 setIsSubMenuOpen(true);
+                        //             }}
+                        //             onMouseLeave={() => {
+                        //                 setHoveredIndex(0);
+                        //                 setIsSubMenuOpen(false);
+                        //             }}
+                        //         >
+                        //             <div className=" flex justify-between ">
+                        //             {ele}
+                        //             <ChevronDown
+                        //                 className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
+                        //             />
+                        //             </div>
+                        //             {isSubMenuOpen && hoveredIndex>0 && hoveredIndex<5 && (
+                        //                 <ul>
+                        //                     {menuOptions[ind].map((el, ind2)=> (
+                        //                        <li key={ind2}>{el}</li>
+                        //                     ))}
+                        //                 </ul>
+                        //                 )}
+                        //         </li>
+                        //     ))}
+                        // </ul>
+*/}
+
                         <ul className="border pl-3">
-                            {menuContent.map((ele, ind) => (
-                                <li
-                                    key={ind}
-                                    className="border p-3 text-xl text-white"
-                                    onMouseEnter={() => setHoveredIndex(ind)}
-                                    onMouseLeave={() => setHoveredIndex(null)}
-                                >
-                                    <div className=" flex justify-between ">
-                                    {ele}
+                        {menuOptions.map((option,ind) => (
+                            <li 
+                            key={ind}
+                                            className="border animate duration-300 p-3 text-xl text-white"
+                                            onMouseEnter={() => {
+                                                setHoveredIndex(ind);
+                                                setActiveMenu(option)
+                            //                     setIsSubMenuOpen(true);
+                                            }}
+                                            onMouseLeave={() => {
+                                                setHoveredIndex(0);
+                            //                     setIsSubMenuOpen(false);
+                                    }}
+                            >
+                            <button
+                                key={option}
+                                onMouseEnter={() => setActiveMenu(option)}
+                                className="hover:text-blue-500"
+                            >
+                                {option.charAt(0).toUpperCase() + option.slice(1)}
                                     <ChevronDown
-                                        className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
-                                    />
-                                    </div>
-                                    {/* <div>
-                                        {(hoveredIndex === ind) && 
-                                            <ul>
-                                                {menuOptions[ind].map((el, ind2)=> (
-                                                    <li key={ind2}>{el}</li>
-                                                ))}
-                                            </ul>
-                                        }
-                                    </div> */}
-                                </li>
-                            ))}
-                        </ul>
-                        <div className="border grid gap-3">
-                            <label className="flex border mx-3 p-2" >
-                                <Search /><input placeholder='Search' className="border w-full p-1" />
-                            </label>
-                            <button>
-                                Sign In
+                                                    className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
+                                                />
                             </button>
-                        </div>
+                                {hoveredIndex===ind &&
+                                    (<ul>
+                                    {menuData[activeMenu]?.map((item, index) => (
+                                        <li key={index}>{item}</li>
+                                    ))}
+                                </ul>)}
+                            </li>
+                        ))}
+                    </ul>
+                    
+
+
+
+
+
+                        {/*  <div className="border grid gap-3">
+                             <label className="flex border mx-3 p-2" >
+                                 <Search /><input placeholder='Search' className="border w-full p-1" />
+                             </label>
+                             <button>
+                                 Sign In
+                             </button>
+                         </div>  */}
                     </motion.div>
                 )}
             </AnimatePresence>
