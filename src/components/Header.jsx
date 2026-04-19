@@ -9,7 +9,7 @@ export default function Header({ classN }) {
     const [hoveredIndex, setHoveredIndex] = useState(false);
     const { theme, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const largeMenu = ['Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
+    const largeMenu = ['Classes', 'Boards', 'Exams', 'Study Materials', 'Exam Updates'];
     const menuOptions = ['classes', 'boards', 'exams', 'studyMaterials', 'examUpdates'];
     const menuData = {
         classes: ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'],
@@ -26,14 +26,21 @@ export default function Header({ classN }) {
                 {/*LOGO AND SITE NAME*/}
                 <div className="flex justify-center items-center gap-3 sm:gap-10 lg:gap-1 xl:gap-12 align-center p-2">
                     <img src={logo} alt="site logo" placeholder="blur" className="h-15 items-center m-auto border rounded-full " />
-                    <h1 className="text-2xl text-center mt-4 text-black font-bold font-serif m-auto">ExamWaliSite</h1>
+                    <h1 className="text-2xl text-center mt-4 text-black font-bold font-serif m-auto ">ExamWaliSite</h1>
                 </div>
 
                 {/* Menu bar when screen size is lower than 768px */}
 
-                <div className="flex w-[25%] lg:hidden justify-around items-center">
-                    <button className="border border-[#a0a0a0] text-semibold rounded-full flex w-12 h-12 justify-center items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
-                        {theme === 'light' ? (<Moon className="w-9 h-9 " />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
+                <div className="flex w-[30%] lg:hidden justify-around gap-4 items-center">
+                    <button className="border border-[#a0a0a0] text-semibold rounded-full flex w-15 h-15 justify-center items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                        {theme === 'light' ? (<Moon className="w-8 h-8 " />) : (<Sun className="w-8 h-8 text-yellow-400" />)}
+                    </button>
+                    <button className="border rounded-full h-15 w-15 xl:w-12 xl:h-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                        <Search className="h-8 w-8 " />
+                        {/* <Sun className="text-yellow-300 bg-yellow-800 rounded-full" size={40} />*/}
+                    </button>
+                    <button className="m-1 p-3 border rounded-xl bg-[#0087ff] text-black font-bold">
+                        Sign In
                     </button>
                     <button onClick={() => setIsMenuOpen((prev) => !prev)} className="lg:hidden" >
                         {!isMenuOpen ? <Menu size={30} /> : <X size={30} />}
@@ -42,22 +49,64 @@ export default function Header({ classN }) {
 
                 {/*menu tabs when screen larger than 768px*/}
 
-                <div className="lg:flex text-sm hidden gap-2 ">
-                    <button >Home</button>
+                <div className="lg:flex text-md lg:text-lg hidden gap-2 ml-4">
+                    <div className="flex items-center gap-1 justify-center" >
+                        <button className="mr-3 hover:font-bold hover:text-[#0078ff]">Home</button>
                     <ul className="flex items-center gap-1 justify-center" >
-                        {largeMenu.map((ele, ind) => (
-                            <li className="pr-1 m-auto  text-sm flex justify-center items-center align-center text-black" key={ind}>
-                                {ele} <ChevronDown className="h-6 w-7" /></li>
+                        {/* {largeMenu.map((ele, ind) => (
+                            <li className="pr-1 lg:text-lg hover:font-bold hover:text-[#0078ff] m-auto text-sm flex justify-center items-center align-center text-black" key={ind}>
+                                 {ele} <ChevronDown className="h-6 w-7 flex justify-center" />
+                                <AnimatePresence className="">
+                                    
+                                </AnimatePresence>
+                            </li>
                         ))}
+                         */}
+                            {menuOptions.map((option, ind) => (
+                                <li
+                                    key={ind}
+                                    className="border-t relative animate duration-300 p-3 text-xl text-black px-6  "
+                                    onMouseEnter={() => {
+                                        setHoveredIndex(ind);
+                                        setActiveMenu(option)
+                                        //setIsSubMenuOpen(true);
+                                    }}
+                                    onMouseLeave={() => {
+                                        setHoveredIndex(NaN);
+                                        //setIsSubMenuOpen(false);
+                                    }}
+                                >
+                                    <button
+                                        key={option}
+                                        onMouseEnter={() => setActiveMenu(option)}
+                                        className="hover:text-blue-500 flex justify-between w-full"
+                                    >
+                                        {option.charAt(0).toUpperCase() + option.slice(1)}
+                                        <ChevronDown
+                                            className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
+                                        />
+                                    </button>
+
+                                    {/* Hover sub-menu options  */}
+                                    {hoveredIndex === ind &&
+                                        (<ul className="border-t absolute bg-white border w-[10vw] p-2 grid gap-2 list-disc list-inside rounded-xl">
+                                            {menuData[activeMenu]?.map((item, index) => (
+                                                <li key={index}>
+                                                    <a className="hover:text-[#0056ff] hover:cursor-pointer">{item}</a>
+                                                </li>
+                                            ))}
+                                        </ul>)}
+                                </li>
+                            ))}
                     </ul>
+                        <button className=" hover:font-bold hover:text-[#0078ff]">Promote Your Brand</button>
+                    </div>
                     <button className="border rounded-full h-10 w-10 xl:w-12 xl:h-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
                         {theme === 'light' ? (<Moon className="w-6 h-6 xl:w-9 xl:h-9 text-grey-800" />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
-                        {/* <Sun className="text-yellow-300 bg-yellow-800 rounded-full" size={40} />*/}
                     </button>
 
-                    <button className="border rounded-full h-10 w-10 xl:w-12 xl:h-12  m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                    <button className="border rounded-full h-10 w-10 xl:w-12 xl:h-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
                         <Search className="h-6 w-6 xl:w-9 xl:h-9 " />
-                        {/* <Sun className="text-yellow-300 bg-yellow-800 rounded-full" size={40} />*/}
                     </button>
                     <button className="m-1 p-3 border rounded-xl bg-[#0087ff] text-black font-bold">
                         Sign In
