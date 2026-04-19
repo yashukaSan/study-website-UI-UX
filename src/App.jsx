@@ -16,8 +16,6 @@ import Footer from './components/Footer'
 
 
 function PopUpScreen({isClose, clasN, setClose}) {
-  
-
   return (
       <section className={isClose? "hidden" : clasN}>
         <div className="flex justify-around text-2xl text-white ">
@@ -43,7 +41,7 @@ function PopUpScreen({isClose, clasN, setClose}) {
 //MAIN FUNCTION
 function App() {
   const [isClose, setIsClose] = useState(false);
-  const popUpClass = "animation text-white duration-500 ease-in-out xl:w-[25vw] lg:h-[40vh] lg:text-lg delay-500 backdrop-blur-lg grid border-t-blue-500 border-t-6 shadow-2xl shadow-white/40 absolute justify-center p-3 rounded-xl w-100 bg-black z-200 mt-30 lg:mt-50 sm:ml-10 lg:ml-50 mx-5";
+  const popUpClass = "animation h-[20rem] text-white duration-500 ease-in-out xl:w-[25vw] lg:h-[23rem] lg:text-lg delay-500 backdrop-blur-lg grid border-t-blue-400 border-t-6 shadow-2xl shadow-white/40 absolute justify-center p-3 rounded-xl w-100 bg-black z-200 mt-30 lg:mt-30 sm:ml-10 lg:ml-50 ";
 
   return (
     <main className="text-black">
