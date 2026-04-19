@@ -52,16 +52,7 @@ export default function Header({ classN }) {
                 <div className="lg:flex text-md lg:text-lg hidden gap-2 ml-4">
                     <div className="flex items-center gap-1 justify-center" >
                         <button className="mr-3 hover:font-bold hover:text-[#0078ff]">Home</button>
-                    <ul className="flex items-center gap-1 justify-center" >
-                        {/* {largeMenu.map((ele, ind) => (
-                            <li className="pr-1 lg:text-lg hover:font-bold hover:text-[#0078ff] m-auto text-sm flex justify-center items-center align-center text-black" key={ind}>
-                                 {ele} <ChevronDown className="h-6 w-7 flex justify-center" />
-                                <AnimatePresence className="">
-                                    
-                                </AnimatePresence>
-                            </li>
-                        ))}
-                         */}
+                        <ul className="flex items-center gap-1 justify-center" >
                             {menuOptions.map((option, ind) => (
                                 <li
                                     key={ind}
@@ -88,36 +79,50 @@ export default function Header({ classN }) {
                                     </button>
 
                                     {/* Hover sub-menu options  */}
-                                    {hoveredIndex === ind &&
-                                        (<ul className="border-t absolute bg-white border w-[10vw] p-2 grid gap-2 list-disc list-inside rounded-xl">
-                                            {menuData[activeMenu]?.map((item, index) => (
-                                                <li key={index}>
-                                                    <a className="hover:text-[#0056ff] hover:cursor-pointer">{item}</a>
-                                                </li>
-                                            ))}
-                                        </ul>)}
+                                    <AnimatePresence>
+                                        {hoveredIndex === ind &&
+                                            (<ul className="border-t absolute bg-white border w-[10vw] p-2 grid gap-2 list-disc list-inside rounded-xl">
+                                                {menuData[activeMenu]?.map((item, index) => (
+                                                    <motion.div
+                                                        // 1. Where it starts (off-screen to the right)
+                                                        initial={{ x: '-1vw' }}
+                                                        // 2. Where it animates to (slides into view)
+                                                        animate={{ x: "0%" }}
+                                                        // 3. Where it goes when 'isOpen' becomes false (slides back right)
+                                                        exit={{ x: '1vw' }}
+                                                        // 4. Control the speed and feel
+                                                        transition={{ type: 'tween', duration: 0.2, ease: 'easeInOut' }}
+                                                        className="z-100 w-full backdrop-blur top-0 text-[#010101]/70 h-full"
+                                                    >
+                                                    <li key={index}>
+                                                        <a className="hover:text-[#0056ff] hover:cursor-pointer">{item}</a>
+                                                    </li>
+                                                    </motion.div>
+                                                ))}
+                                            </ul>)}
+                                    </AnimatePresence>
                                 </li>
                             ))}
                     </ul>
-                        <button className=" hover:font-bold hover:text-[#0078ff]">Promote Your Brand</button>
-                    </div>
-                    <button className="border rounded-full h-10 w-10 xl:w-12 xl:h-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
-                        {theme === 'light' ? (<Moon className="w-6 h-6 xl:w-9 xl:h-9 text-grey-800" />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
-                    </button>
-
-                    <button className="border rounded-full h-10 w-10 xl:w-12 xl:h-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
-                        <Search className="h-6 w-6 xl:w-9 xl:h-9 " />
-                    </button>
-                    <button className="m-1 p-3 border rounded-xl bg-[#0087ff] text-black font-bold">
-                        Sign In
-                    </button>
+                    <button className=" hover:font-bold hover:text-[#0078ff]">Promote Your Brand</button>
                 </div>
+                <button className="border rounded-full h-10 w-10 xl:w-12 xl:h-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                    {theme === 'light' ? (<Moon className="w-6 h-6 xl:w-9 xl:h-9 text-grey-800" />) : (<Sun className="w-9 h-9 text-yellow-400" />)}
+                </button>
 
-            </section>
+                <button className="border rounded-full h-10 w-10 xl:w-12 xl:h-12 m-auto flex justify-around items-center " onClick={toggleTheme} arial-label="Toggel Theme" >
+                    <Search className="h-6 w-6 xl:w-9 xl:h-9 " />
+                </button>
+                <button className="m-1 p-3 border rounded-xl bg-[#0087ff] text-black font-bold">
+                    Sign In
+                </button>
+            </div>
 
-            {/**Side Menu Open Screen */}
-            <AnimatePresence className="lg:hidden bg-white">
-                {isMenuOpen && (
+        </section >
+
+            {/**Side Menu Open Screen */ }
+            < AnimatePresence className = "lg:hidden bg-white" >
+                { isMenuOpen && (
                     <motion.div
                         // 1. Where it starts (off-screen to the right)
                         initial={{ x: '100%' }}
@@ -132,9 +137,9 @@ export default function Header({ classN }) {
                         {/* Menu Heading and Close Icon */}
                         <div className="flex justify-between">
                             <p className="text-4xl text-purple-600 hover:transition-shadow hover:shadow-xl border-b-4 h-full hover:shadow-purple-400 font-serif font-extrabold relative left-10 top-5 ">MENU</p>
-                        <X onClick={() => setIsMenuOpen(false)} className="hover:cursor-pointer m-2 hover:shadow-xl transition-shadow rounded-full hover:shadow-black text-black" size={50} />
+                            <X onClick={() => setIsMenuOpen(false)} className="hover:cursor-pointer m-2 hover:shadow-xl transition-shadow rounded-full hover:shadow-black text-black" size={50} />
                         </div>
-                            {/*Menu Options*/}
+                        {/*Menu Options*/}
                         <ul className="border pl-3 text-black">
                             <button onClick={() => setIsMenuOpen(false)} className="text-xl w-full text-left font-bold px-6 py-3 hover:cursor-pointer hover:text-[#0078ff] hover:text-2xl">Home</button>
                             {menuOptions.map((option, ind) => (
@@ -161,7 +166,7 @@ export default function Header({ classN }) {
                                             className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
                                         />
                                     </button>
-                                    
+
                                     {/* Hover sub-menu options  */}
                                     {hoveredIndex === ind &&
                                         (<ul className="border-t">
@@ -186,8 +191,9 @@ export default function Header({ classN }) {
                             </button>
                         </div>
                     </motion.div>
-                )}
-            </AnimatePresence>
+                )
+}
+            </AnimatePresence >
         </>
     );
 }
