@@ -7,22 +7,10 @@ import { motion, AnimatePresence } from 'motion/react';
 export default function Header({ classN }) {
 
     const [hoveredIndex, setHoveredIndex] = useState(false);
-    const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const menuContent = ['Home', 'Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
     const largeMenu = ['Classes', 'Boards', 'Exmas', 'Study Materials', 'Exam Updates', 'Promote Your Brand'];
-    const menuOptions = [ 'classes','boards', 'exams', 'studyMaterials', 'examUpdates' ];
-    // const classes = ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'];
-    // const boards = ['CBSE', 'ICSE',];
-    // const exams = ['CUET', 'NEET', 'JEE', 'Class 6-8', 'Class 9-10', 'Class 12', 'All'];
-    // const studyMaterials = ['Notes', 'Practice Papers', 'Reference Books'];
-    // const examUpdates = [
-    //     'All Updates', 'CUET Updates', 'NEET Updates', 'JEE Updates',
-    //     'Board Exam Updates', 'Admit Cards', 'Results', 'Syllabus Updates'
-    // ];
-    // const stateBoard = ['UP Board', 'Bihar Board', 'Rajathan Board', 'MP Board'];
-
+    const menuOptions = ['classes', 'boards', 'exams', 'studyMaterials', 'examUpdates'];
     const menuData = {
         classes: ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'],
         boards: ['CBSE', 'ICSE'],
@@ -31,9 +19,6 @@ export default function Header({ classN }) {
         examUpdates: ['All Updates', 'CUET Updates', 'NEET Updates', 'JEE Updates']
     };
     const [activeMenu, setActiveMenu] = useState('classes');
-
-    console.log(hoveredIndex>0);
-    console.log(hoveredIndex<5);
 
     return (
         <>
@@ -80,105 +65,77 @@ export default function Header({ classN }) {
                 </div>
 
             </section>
-            <AnimatePresence className="lg:hidden">
+
+            {/**Side Menu Open Screen */}
+            <AnimatePresence className="lg:hidden bg-white">
                 {isMenuOpen && (
                     <motion.div
                         // 1. Where it starts (off-screen to the right)
                         initial={{ x: '100%' }}
-
                         // 2. Where it animates to (slides into view)
                         animate={{ x: 0 }}
-
                         // 3. Where it goes when 'isOpen' becomes false (slides back right)
                         exit={{ x: '100%' }}
-
                         // 4. Control the speed and feel
                         transition={{ type: 'tween', duration: 0.4, ease: 'easeInOut' }}
-                        className="z-100 absolute w-full backdrop-blur top-0 bg-[#010101]/70 h-full"
+                        className="z-100 absolute w-full lg:hidden backdrop-blur top-0 text-[#010101]/70 h-full"
                     >
-                        {/* Close Icon */}
-                        <X onClick={() => setIsMenuOpen(false)} className="hover:cursor-pointer m-2 text-white ml-[90%]" size={50} />
-
-                        {/* <ul className="border pl-3"> 
-                        //     {menuContent.map((ele, ind) => (
-                        //         <li
-                        //             key={ind}
-                        //             className="border animate duration-300 p-3 text-xl text-white"
-                        //             onMouseEnter={() => {
-                        //                 setHoveredIndex(ind);
-                        //                 setIsSubMenuOpen(true);
-                        //             }}
-                        //             onMouseLeave={() => {
-                        //                 setHoveredIndex(0);
-                        //                 setIsSubMenuOpen(false);
-                        //             }}
-                        //         >
-                        //             <div className=" flex justify-between ">
-                        //             {ele}
-                        //             <ChevronDown
-                        //                 className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
-                        //             />
-                        //             </div>
-                        //             {isSubMenuOpen && hoveredIndex>0 && hoveredIndex<5 && (
-                        //                 <ul>
-                        //                     {menuOptions[ind].map((el, ind2)=> (
-                        //                        <li key={ind2}>{el}</li>
-                        //                     ))}
-                        //                 </ul>
-                        //                 )}
-                        //         </li>
-                        //     ))}
-                        // </ul>
-*/}
-
-                        <ul className="border pl-3">
-                        {menuOptions.map((option,ind) => (
-                            <li 
-                            key={ind}
-                                            className="border animate duration-300 p-3 text-xl text-white"
-                                            onMouseEnter={() => {
-                                                setHoveredIndex(ind);
-                                                setActiveMenu(option)
-                            //                     setIsSubMenuOpen(true);
-                                            }}
-                                            onMouseLeave={() => {
-                                                setHoveredIndex(0);
-                            //                     setIsSubMenuOpen(false);
+                        {/* Menu Heading and Close Icon */}
+                        <div className="flex justify-between">
+                            <p className="text-4xl text-purple-600 hover:transition-shadow hover:shadow-xl border-b-4 h-full hover:shadow-purple-400 font-serif font-extrabold relative left-10 top-5 ">MENU</p>
+                        <X onClick={() => setIsMenuOpen(false)} className="hover:cursor-pointer m-2 hover:shadow-xl transition-shadow rounded-full hover:shadow-black text-black" size={50} />
+                        </div>
+                            {/*Menu Options*/}
+                        <ul className="border pl-3 text-black">
+                            <button onClick={() => setIsMenuOpen(false)} className="text-xl w-full text-left font-bold px-6 py-3 hover:cursor-pointer hover:text-[#0078ff] hover:text-2xl">Home</button>
+                            {menuOptions.map((option, ind) => (
+                                <li
+                                    key={ind}
+                                    className="border-t animate duration-300 p-3 text-xl text-black font-bold px-6  "
+                                    onMouseEnter={() => {
+                                        setHoveredIndex(ind);
+                                        setActiveMenu(option)
+                                        //setIsSubMenuOpen(true);
                                     }}
-                            >
-                            <button
-                                key={option}
-                                onMouseEnter={() => setActiveMenu(option)}
-                                className="hover:text-blue-500"
-                            >
-                                {option.charAt(0).toUpperCase() + option.slice(1)}
-                                    <ChevronDown
-                                                    className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
-                                                />
+                                    onMouseLeave={() => {
+                                        setHoveredIndex(NaN);
+                                        //setIsSubMenuOpen(false);
+                                    }}
+                                >
+                                    <button
+                                        key={option}
+                                        onMouseEnter={() => setActiveMenu(option)}
+                                        className="hover:text-blue-500 flex justify-between w-full"
+                                    >
+                                        {option.charAt(0).toUpperCase() + option.slice(1)}
+                                        <ChevronDown
+                                            className={hoveredIndex === ind ? "animate duration-400 rotate-180" : "animate duration-400 "}
+                                        />
+                                    </button>
+                                    
+                                    {/* Hover sub-menu options  */}
+                                    {hoveredIndex === ind &&
+                                        (<ul className="border-t">
+                                            {menuData[activeMenu]?.map((item, index) => (
+                                                <li key={index}>
+                                                    <a className="hover:text-[#0056ff] hover:cursor-pointer">{item}</a>
+                                                </li>
+                                            ))}
+                                        </ul>)}
+                                </li>
+                            ))}
+                            {/** Promote Your Brand Option */}
+                            <li className=" border-t"><button className="text-xl font-bold px-6 py-3">Promote Your Brand </button></li>
+                        </ul>
+                        {/* last section */}
+                        <div className="border grid gap-3">
+                            <label className="flex border-2 mt-6 mx-3 p-4 w-[full] m-auto items-center rounded-3xl " >
+                                <Search className="h-12 w-12 ml-5" /><input placeholder='Search' className="font-semibold rounded-4xl border w-[50%]  m-auto text-center p-1" />
+                            </label>
+                            <button className="bg-blue-400 hover:bg-blue-500 hover:transform hover:translate-y-[-3px] w-[40vw] p-5 rounded-xl text-2xl font-bold border m-auto hover:cursor-pointer ">
+                                Sign In
                             </button>
-                                {hoveredIndex===ind &&
-                                    (<ul>
-                                    {menuData[activeMenu]?.map((item, index) => (
-                                        <li key={index}>{item}</li>
-                                    ))}
-                                </ul>)}
-                            </li>
-                        ))}
-                    </ul>
-                    
-
-
-
-
-
-                        {/*  <div className="border grid gap-3">
-                             <label className="flex border mx-3 p-2" >
-                                 <Search /><input placeholder='Search' className="border w-full p-1" />
-                             </label>
-                             <button>
-                                 Sign In
-                             </button>
-                         </div>  */}
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
