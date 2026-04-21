@@ -34,6 +34,7 @@ export default function Hero(){
                 <MoveDown size={70} className="animate-wiggle pt-15  m-auto z-100" />
                 <p className="animate-wiggle m-auto z-100" >Explore More</p>
             </div>
+            
         </section>
     );
 }
