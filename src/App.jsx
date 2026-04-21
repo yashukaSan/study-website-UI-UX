@@ -2,7 +2,7 @@
 import './App.css'
 import { useState } from 'react';
 import { Mail, ArrowRight, X } from 'lucide-react'
-import Header from './components/Header'
+import Header from './components/Header' //Done
 import Hero from './components/Hero'
 import Overview from './components/Overview'
 import Courses from './components/Courses'

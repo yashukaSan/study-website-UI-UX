@@ -1,2 +1,30 @@
 @import 'tailwindcss';
 
+@theme {
+    --animate-upward-move: upward-move 6s linear infinite;
+
+    @keyframes upward-move {
+        0% {
+            transform: translateY(10px);
+        }
+        100%{
+            transform: translateY(-115px);
+        }
+    } 
+}
+
+@theme {
+    --animate-wiggle: wiggle 2s ease-in-out infinite;
+
+    @keyframes wiggle {
+
+        0%,
+        100% {
+            transform: translateY(-7px);
+        }
+
+        50% {
+            transform: translateY(7px);
+        }
+    } 
+}
