@@ -7,7 +7,7 @@ export default function Hero(){
 
     return (
         <section className="border pt-5 text-center grid gap-4">
-            <div className="flex justify-center text-lg m-auto w-[15vw]">
+            <div className="flex justify-center text-lg m-auto ">
                 <Target />&nbsp;&nbsp;Find Resources For&nbsp;&nbsp;&nbsp; <div className=" text-xl relative overflow-hidden h-10 grid gap-2">
                 {resurceType.map((el, ind) => (
                     <div key={ind} className={`${el[1]} h-full text-center text-white rounded-xl px-3 animation animate-upward-move mb-1`}>
