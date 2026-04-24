@@ -28,3 +28,17 @@
         }
     } 
 }
+
+@theme{
+    --animate-upDown: upDown 3s linear infinite;
+
+    @keyframes upDown{
+        0%, 100%{
+            transform: translateY(0px);
+        }
+        50%{
+            transform: translateY(20px);
+        }
+        
+    }
+}
