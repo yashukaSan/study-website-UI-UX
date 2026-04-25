@@ -22,15 +22,15 @@ export default function Hero(){
                 Access study materials, notes, books, and preparation resources for <br />
                 CBSE, NEET, JEE, CUET and more
             </p>
-            <label className="flex gap-3 justify-around p-4 bg-[#f0f0f0] w-[25%] rounded-xl m-auto">
-                <Search /> <input className="rounded-xl pl-5 text-black text-sm  w-[70%]" placeholder="Search notes, books, sample paper, etc, " /> <button className="border bg-[#0056ff] text-white rounded-3xl w-40 p-2">Search Resources</button>
+            <label className="flex items-center gap-3 justify-around p-4 bg-[#f0f0f0] lg:w-[25%] rounded-xl m-auto">
+                <Search /> <input className="rounded-xl pl-5 text-black text-lg  w-[70%]" placeholder="Search notes, books, sample paper, etc, " /> <button className="border bg-[#0056ff] text-white rounded-3xl w-40 p-2">Search Resources</button>
             </label>
             <div className="flex gap-3 justify-center">
                 {exams.map(el => (<div className="border p-2 rounded-3xl w-25 text-lg">{el}</div>))}
             </div>
 
             <div className="h-40 overflow-hidden">
-                <div className="border-t-5  overflow-hidden w-[48vw] left-[25.56vw] rounded-full z-0 h-[65vw] absolute "> </div>
+                <div className="border-t-5  overflow-hidden w-[48vw] left-[25.56vw] rounded-full z-0 h-[65vw] absolute bg-blue-100" />
                 <MoveDown size={70} className="animate-wiggle pt-15  m-auto z-100" />
                 <p className="animate-wiggle m-auto z-100" >Explore More</p>
             </div>
