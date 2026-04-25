@@ -6,7 +6,7 @@ export default function Hero(){
     const exams = ['CBSE', 'NEET', 'JEE', 'CUET', 'Class 10', 'Class 12'];
 
     return (
-        <section className="border pt-5 text-center grid gap-4">
+        <section className="border pt-5 text-center z-00 grid overflow-hidden gap-4">
             <div className="flex justify-center text-lg m-auto ">
                 <Target />&nbsp;&nbsp;Find Resources For&nbsp;&nbsp;&nbsp; <div className=" text-xl relative overflow-hidden h-10 grid gap-2">
                 {resurceType.map((el, ind) => (
@@ -30,7 +30,7 @@ export default function Hero(){
             </div>
 
             <div className="h-40 overflow-hidden">
-                <div className="border-t-5  w-[48vw] left-[25.56vw] rounded-full z-0 h-[65vw] absolute "> </div>
+                <div className="border-t-5  overflow-hidden w-[48vw] left-[25.56vw] rounded-full z-0 h-[65vw] absolute "> </div>
                 <MoveDown size={70} className="animate-wiggle pt-15  m-auto z-100" />
                 <p className="animate-wiggle m-auto z-100" >Explore More</p>
             </div>
