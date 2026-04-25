@@ -14,9 +14,9 @@ export default function Overview({ classN }) {
                     <p className="text-lg mt-4">
                         Checkout Premium study materials available on our platform to boost up your Exam Preparation
                     </p>
-                    <div className="flex justify-around">
-                        <div className="animation bg-blue-600 text-white w-[10vw] h-[10vw] rounded-full animate-upDown delay-200  duration-300">
-                            <Search className='relative left-13 bottom-4 bg-white rounded-full text-blue-500 p-1' />
+                    <div className="flex justify-around relative">
+                        <div className="animation bg-blue-600 relative text-white w-[10vw] h-[10vw] rounded-full animate-upDown delay-200  duration-300">
+                            <Search className='absolute left-23 bottom4 bg-white rounded-full text-blue-500 p-1' />
                             <p className="font-bold text-xl text-center items-center relative top-5">Learn</p>
                         </div>
                         <div className="animation bg-blue-600 text-white w-[10vw] h-[10vw] rounded-full animate-upDown delay-200  duration-300">
