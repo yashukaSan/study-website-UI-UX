@@ -26,19 +26,19 @@ export default function StartProp(){
                     Choose your exam or class and explore curated study materials, notes, mock tests, and guides designated to help you prepare with confidence.
                 </p>
             </div>
-            <ul>
+            <ul className="grid md:gap-0 md:mx-10 gap-3 md:grid-cols-4">
                 {prepType.map((item, ind)=> (
                     <li
-                        className="grid text-lg font-semibold mt-14 px-5 pb-10 group relative py-3 border border-blue-600 text-black transition-colors duration-300 hover:text-white"
+                        className="grid text-lg  font-semibold mt-14 px-5 pb-10 group relative py-3 border border-blue-600 text-black transition-colors duration-300 hover:text-white"
                      onMouseEnter={()=>{setIsHover(true); setKeyVal(ind)}}
                      onMouseLeave={()=>{setIsHover(false); setKeyVal(NaN)}}
                      key={ind}
                     >
                         <Target className={(isHover && keyVal===ind) ? "animation rounded-full bg-white duration-400 m-auto mb-0 relative p-4  text-[#0056ff] h-20 w-20 tranform -translate-y-10" : "animation rounded-full text-white duration-400 m-auto mb-0 relative p-4 hover:bg-transparent bg-[#0056ff] h-20 w-20 tranform -translate-y-10"} />
-                        <h1 className="-mt-8 text-2xl mb-2 font-semibold">
+                        <h1 className="-mt-8 text-2xl md:p-4 md:text-4xl mb-2 font-semibold">
                             {item[0]}
                         </h1>
-                        <p >
+                        <p className="text-3xl lg:p-4 " >
                             {item[1]}
                         </p>
                         <p className="flex gap-3 mt-3 items-center">

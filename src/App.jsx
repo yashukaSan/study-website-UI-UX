@@ -49,7 +49,7 @@ function App() {
       <section className={isClose? "" : "blur"}>
       <Header classN="border border-[#aaaaaa] h-full flex lg:w-full justify-between w-full lg:w-[60vw] px-3 " />
       <Hero />
-      <Overview />
+      <Overview classN="z-100 bg-[#ececec] relative" />
       <Courses />
       <StartPrep />
       <News />
