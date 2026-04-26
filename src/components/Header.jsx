@@ -1,5 +1,5 @@
 import logo from "../assets/Group.png"
-import { Sun, ChevronDown, Menu, Moon, X, Search } from 'lucide-react'
+import { Sun, ChevronDown, Menu, Moon, X, Search, Dot } from 'lucide-react'
 import { useTheme } from '../ThemeContext'
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -9,6 +9,7 @@ export default function Header({ classN }) {
     const [hoveredIndex, setHoveredIndex] = useState(false);
     const { theme, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [hoverIndex, setHoverIndex] = useState(NaN);
     const menuOptions = ['classes', 'boards', 'exams', 'studyMaterials', 'examUpdates'];
     const menuData = {
         classes: ['Class 6-8', 'Class 9-10', 'Class 11-12', 'Competitive'],
@@ -20,7 +21,7 @@ export default function Header({ classN }) {
     const [activeMenu, setActiveMenu] = useState('classes');
 
     return (
-        <>
+        <section>
             <section className={classN}>
                 {/*LOGO AND SITE NAME*/}
                 <div className="flex justify-center items-center gap-3 mr-4 sm:gap-10 lg:gap-1 xl:gap-12 align-center p-2">
@@ -54,7 +55,7 @@ export default function Header({ classN }) {
                         <button className=" xl:text-lg text-sm hover:font-bold p-1 hover:text-[#0078ff] m-0">
                             Home
                         </button>
-                        <ul className="flex gap-2 items-center xl:gap-0 2xl:text-xl xl:text-lg ml-1 justify-between text-sm m-0" >
+                        <ul className="flex gap-4 items-center xl:gap-6 2xl:text-xl xl:text-lg ml-1 justify-between text-sm m-0" >
                             {menuOptions.map((option, ind) => (
                                 <li
                                     key={"main-" + ind}
@@ -66,6 +67,7 @@ export default function Header({ classN }) {
                                     }}
                                     onMouseLeave={() => {
                                         setHoveredIndex(NaN);
+                                        setHoverIndex(NaN);
                                         //setIsSubMenuOpen(false);
                                     }}
                                 >
@@ -83,7 +85,7 @@ export default function Header({ classN }) {
                                     {/* Hover sub-menu options  */}
                                     <AnimatePresence>
                                         {hoveredIndex === ind &&
-                                            (<ul className="absolute bg-white w-[10vw] l:w-[20vw] border xl:w-[10vw] p-2 grid list-disc list-inside rounded-xl">
+                                            (<ul className="absolute w-50 bg-white p-2 grid gap-4 rounded-xl" onMouseLeave={()=>setHoverIndex(NaN)}>
                                                 {menuData[activeMenu]?.map((item, index) => (
                                                     <motion.div
                                                         // 1. Where it starts (off-screen to the right)
@@ -95,9 +97,10 @@ export default function Header({ classN }) {
                                                         // 4. Control the speed and feel
                                                         transition={{ type: 'tween', duration: 0.2, ease: 'easeInOut' }}
                                                         className="z-100 w-full bg-white top-0 text-[#010101]/70 h-full"
+                                                        onMouseLeave={() => setHoverIndex(NaN)}
                                                     >
-                                                    <li key={"up-" + index}>
-                                                        <a className="hover:text-[#0056ff] hover:cursor-pointer">{item}</a>
+                                                    <li key={"up-" + index} className="flex gap-2" onMouseEnter={()=>setHoverIndex("up"+index)} onMouuseLeave={()=>setHoverIndex(NaN)}>
+                                                        <Dot className={(hoverIndex && hoverIndex==="up"+index)? "text-blue-600 transform scale-300" : "text-green-600 transform scale-200"} /><a className="hover:text-[#0056ff] hover:cursor-pointer">{item}</a>
                                                     </li>
                                                     </motion.div>
                                                 ))}
@@ -200,6 +203,6 @@ export default function Header({ classN }) {
                 )
 }
             </AnimatePresence >
-        </>
+        </section>
     );
 }

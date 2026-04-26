@@ -15,11 +15,20 @@ import Footer from './components/Footer'
 
 
 
-function PopUpScreen({isClose, clasN, setClose}) {
+function PopUpScreen({onClose, clasN}) {
+  const closePopUp = () => {
+    console.log(localStorage.getItem('isClose'), "hell");
+    localStorage.setItem('isClose', true);
+    console.log(localStorage.getItem('isClose'), "hell");
+  };
+
   return (
-      <section className={isClose? "hidden" : clasN}>
-        <div className="flex justify-around text-2xl text-white ">
-          <div className="flex gap-6 lg:text-3xl"><Mail className="text-blue-500 mt-2 lg:h-10 lg:w-10 lg:m-0" /> Stay Updated</div> <X className="lg:mt-1 lg:h-8 lg:w-10" onClick={()=>setClose(prev => !prev)} />
+      <section className={clasN}>
+        <div className="flex justify-around w-[80%] text-2xl text-white ">
+          <div className="flex gap-6 lg:text-3xl">
+            <Mail className="text-blue-500 mt-2 lg:h-10 lg:w-10 lg:m-0" /> Stay Updated
+          </div>
+          <X className="lg:mt-1 lg:h-8 lg:w-10" onClick={onClose} />
         </div>
         <hr className="w-[95%] mt-2 m-auto" />
         <div className="xl:mx-10 mx-5 text-center lg:text-xl my-3">
@@ -40,14 +49,26 @@ function PopUpScreen({isClose, clasN, setClose}) {
 
 //MAIN FUNCTION
 function App() {
-  const [isClose, setIsClose] = useState(false);
+
+  const [isClose, setIsClose] = useState(()=>{
+    return localStorage.getItem('isClose')==='true';
+  })
   const popUpClass = "animation h-[20rem] text-white duration-500 ease-in-out xl:w-[25vw] lg:h-[23rem] lg:text-lg delay-500 backdrop-blur-lg grid border-t-blue-400 border-t-6 shadow-2xl shadow-white/40 absolute justify-center p-3 rounded-xl w-100 bg-black z-200 mt-30 lg:mt-30 sm:ml-10 lg:ml-50 ";
+
+  const handleClose = () => {
+    localStorage.setItem('isClose', 'true');
+    setIsClose(true);
+  }
 
   return (
     <main className="text-black">
-      <PopUpScreen isClose={isClose} clasN={popUpClass} setClose={setIsClose} />
-      <section className={isClose? "" : "blur"}>
-      <Header classN="border border-[#aaaaaa] h-full flex lg:w-full justify-between w-full lg:w-[60vw] px-3 " />
+      {!isClose && 
+      (
+        <PopUpScreen onClose={handleClose} clasN={popUpClass} />
+      )
+      }
+      <section className={localStorage.getItem('isClose') ? "" : "blur"}>
+      <Header classN="h-full xl:mt-5 flex xl:w-[80%] xl:m-auto justify-between w-full xl:w-[60vw] px-3 " />
       <Hero />
       <Overview classN="z-100 bg-[#ececec] relative" />
       <Courses />

@@ -30,7 +30,7 @@ export default function Hero(){
             </div>
 
             <div className="h-40 overflow-hidden">
-                <div className="border-t-5  overflow-hidden w-[48vw] left-[25.56vw] rounded-full z-0 h-[65vw] absolute bg-blue-100" />
+                <div className="border-t-5 overflow-hidden w-[48vw] left-[25.56vw] rounded-full z-0 h-[65vw] absolute bg-linear-[#00bcff,white,transparent,transparent,transparent]" />
                 <MoveDown size={70} className="animate-wiggle pt-15  m-auto z-100" />
                 <p className="animate-wiggle m-auto z-100" >Explore More</p>
             </div>
